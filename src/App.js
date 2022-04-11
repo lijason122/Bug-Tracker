@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap"
 import { AuthProvider } from "./contexts/AuthContext"
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import Dashboard from "./components/Dashboard"
+import Login from './components/Login'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/signup" element={<Signup />} />
+                <Route path="/login" element={<Login />} />
               </Routes>
             </AuthProvider>
           </Router>
