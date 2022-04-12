@@ -5,9 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 
 const UpdateProfile = () => {
   const emailRef = useRef();
+  const firstNameRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { currentUser, updatePassword, updateEmail } = useAuth();
+  const { currentUser, updatePassword, updateEmail, updateFirstName } =
+    useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -27,6 +29,9 @@ const UpdateProfile = () => {
     }
     if (passwordRef.current.value) {
       promises.push(updatePassword(passwordRef.current.value));
+    }
+    if (firstNameRef.current.value !== currentUser.displayName) {
+      promises.push(updateFirstName(firstNameRef.current.value));
     }
 
     Promise.all(promises)
@@ -57,8 +62,16 @@ const UpdateProfile = () => {
                 defaultValue={currentUser.email}
               />
             </Form.Group>
-            <br />
-            <Form.Group id="password">
+            <Form.Group id="firstName" className="mt-3">
+              <Form.Label>First Name</Form.Label>
+              <Form.Control
+                type="text"
+                ref={firstNameRef}
+                required
+                defaultValue={currentUser.displayName}
+              />
+            </Form.Group>
+            <Form.Group id="password" className="mt-3">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
@@ -66,8 +79,7 @@ const UpdateProfile = () => {
                 placeholder="Leave blank to keep the same"
               />
             </Form.Group>
-            <br />
-            <Form.Group id="password-confirm">
+            <Form.Group id="password-confirm" className="mt-3">
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control
                 type="password"
@@ -75,8 +87,7 @@ const UpdateProfile = () => {
                 placeholder="Leave blank to keep the same"
               />
             </Form.Group>
-            <br />
-            <Button disabled={loading} className="w-100" type="submit">
+            <Button disabled={loading} className="w-100 mt-3" type="submit">
               Update
             </Button>
           </Form>

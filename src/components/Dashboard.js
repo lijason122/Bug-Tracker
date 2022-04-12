@@ -19,15 +19,22 @@ const Dashboard = () => {
     }
   }
 
+  console.log(currentUser);
   return (
     <>
+      <h1>Welcome, {currentUser.displayName}!</h1>
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <strong>Email:</strong> {currentUser.email}
+          <br />
+          <strong>Name:</strong> {currentUser.displayName}
           <Link to="/update-profile" className="btn btn-primary w-100 mt-3">
             Update Profile
+          </Link>
+          <Link to="/bug-tracker" className="btn btn-primary w-100 mt-3">
+            Bug Tracker
           </Link>
         </Card.Body>
       </Card>

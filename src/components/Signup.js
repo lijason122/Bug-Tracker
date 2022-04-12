@@ -1,35 +1,42 @@
-import React, { useState, useRef } from "react"
-import { Form, Button, Card, Alert } from "react-bootstrap"
-import { useAuth } from "../contexts/AuthContext"
-import { Link, useNavigate } from "react-router-dom"
+import React, { useState, useRef } from "react";
+import { Form, Button, Card, Alert } from "react-bootstrap";
+import { useAuth } from "../contexts/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  const emailRef = useRef()
-  const passwordRef = useRef()
-  const passwordConfirmRef = useRef()
-  const { signup } = useAuth()
-  const [error, setError] = useState('')
+  const emailRef = useRef();
+  const firstNameRef = useRef();
+  const passwordRef = useRef();
+  const passwordConfirmRef = useRef();
+  const { signup } = useAuth();
+  const [error, setError] = useState("");
   // Prevent the user from clicking the sign up button and creating the same account multiple times
-  const [loading, setLoading] = useState(false) 
-  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError('Passwords do not match')
+      return setError("Passwords do not match");
     }
 
     try {
-      setError('')
-      setLoading(true)
-      await signup(emailRef.current.value, passwordRef.current.value)
-      navigate("/")
+      setError("");
+      setLoading(true);
+      await signup(
+        emailRef.current.value,
+        passwordRef.current.value,
+        firstNameRef.current.value
+      );
+      navigate("/");
     } catch {
-      setError('Failed to create an account. Password must be at least 6 characters long.')
+      setError(
+        "Failed to create an account. Password must be at least 6 characters long."
+      );
     }
 
-    setLoading(false)
+    setLoading(false);
   }
 
   return (
@@ -43,18 +50,19 @@ const Signup = () => {
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
             </Form.Group>
-            <br />
-            <Form.Group id="password">
+            <Form.Group id="firstName" className="mt-3">
+              <Form.Label>First Name</Form.Label>
+              <Form.Control type="text" ref={firstNameRef} required />
+            </Form.Group>
+            <Form.Group id="password" className="mt-3">
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
-            <br />
-            <Form.Group id="password-confirm">
+            <Form.Group id="password-confirm" className="mt-3">
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control type="password" ref={passwordConfirmRef} required />
             </Form.Group>
-            <br />
-            <Button disabled={loading} className="w-100" type="submit">
+            <Button disabled={loading} className="w-100 mt-3" type="submit">
               Sign Up
             </Button>
           </Form>
@@ -64,7 +72,7 @@ const Signup = () => {
         Already have an account? <Link to="/login">Log In</Link>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;

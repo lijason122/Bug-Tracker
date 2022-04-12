@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import ForgotPassword from "./components/ForgotPassword";
 import UpdateProfile from "./components/UpdateProfile";
+import BugTracker from "./components/BugTracker";
 
 function App() {
   return (
@@ -32,6 +33,14 @@ function App() {
                   element={
                     <PrivateRoute>
                       <UpdateProfile />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/bug-tracker"
+                  element={
+                    <PrivateRoute>
+                      <BugTracker />
                     </PrivateRoute>
                   }
                 />
