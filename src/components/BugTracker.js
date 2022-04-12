@@ -16,6 +16,7 @@ const BugTracker = () => {
 
   useEffect(() => {
     db.collection("bugs")
+      .orderBy("order", "asc")
       .get()
       .then((querySnapshot) => {
         let arr = [];
@@ -46,6 +47,8 @@ const BugTracker = () => {
       priority: newBugPriority,
       createBy: currentUser.displayName,
       assignedTo: newUser,
+      order:
+        newBugPriority === "High" ? 1 : newBugPriority === "Medium" ? 2 : 3,
     };
 
     setNewBugDescription("");
@@ -61,10 +64,10 @@ const BugTracker = () => {
   };
 
   return (
-    <div className="w-100" style={{ maxWidth: "8000px" }}>
+    <div>
       <h1>Bug Tracker 🐛</h1>
       <BugTable bugs={bugList} onDeleteBug={(id) => deleteBug(id)} />
-      <form className="add-new-bug-form" onSubmit={addBug}>
+      <form onSubmit={addBug}>
         <Form.Group id="newBugDescription">
           <Form.Label>New Bug Description:</Form.Label>
           <Form.Control
@@ -88,13 +91,14 @@ const BugTracker = () => {
           </Form.Select>
         </Form.Group>
         <Form.Group id="newUser" className="mt-3">
-          <Form.Label>Assigned To:</Form.Label>
+          <Form.Label>Assign To:</Form.Label>
           <Form.Select
             type="text"
             required
             value={newUser}
             onChange={(event) => setNewUser(event.target.value)}
           >
+            <option>Select User</option>
             {userList.map((user, i) => {
               return (
                 <option key={i} value={user.name}>
@@ -109,7 +113,9 @@ const BugTracker = () => {
         </Button>
       </form>
       <div className="w-100 text-center mt-2">
-        <Link to="/">Go Back</Link>
+        <Link to="/" className="link">
+          Go Back
+        </Link>
       </div>
     </div>
   );
