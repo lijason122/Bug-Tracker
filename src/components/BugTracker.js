@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Form, Button } from "react-bootstrap";
 import { db } from "../firebase";
 import { Link } from "react-router-dom";
 import BugTable from "./BugTable";
@@ -108,11 +108,11 @@ const BugTracker = () => {
             })}
           </Form.Select>
         </Form.Group>
-        <Button className="w-100 mt-3" type="submit">
+        <Button className="w-100 mt-3 btn-info" type="submit">
           Add New Bug
         </Button>
       </form>
-      <div className="w-100 text-center mt-2">
+      <div className="w-100 text-center mt-4">
         <Link to="/" className="link">
           Go Back
         </Link>

@@ -8,6 +8,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import ForgotPassword from "./components/ForgotPassword";
 import UpdateProfile from "./components/UpdateProfile";
 import BugTracker from "./components/BugTracker";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
               </Routes>
             </AuthProvider>
           </Router>
+          <Footer />
         </div>
       </Container>
     </AuthProvider>
