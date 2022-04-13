@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
-import { db } from "../firebase";
+import { db, increment, decrement } from "../firebase";
 import { Link } from "react-router-dom";
 import BugTable from "./BugTable";
 import { useAuth } from "../contexts/AuthContext";
@@ -54,11 +54,13 @@ const BugTracker = () => {
     setNewBugDescription("");
     setNewBugPriority("Medium");
 
+    db.collection("users").doc(newUser).update({ bugCount: increment });
     db.collection("bugs").add(newBug);
     setLoading(true);
   };
 
-  const deleteBug = (id) => {
+  const deleteBug = (id, user) => {
+    db.collection("users").doc(user).update({ bugCount: decrement });
     db.collection("bugs").doc(id).delete();
     setLoading(true);
   };
@@ -66,7 +68,10 @@ const BugTracker = () => {
   return (
     <div>
       <h1>Bug Tracker 🐛</h1>
-      <BugTable bugs={bugList} onDeleteBug={(id) => deleteBug(id)} />
+      <BugTable
+        bugs={bugList}
+        onDeleteBug={(id, user) => deleteBug(id, user)}
+      />
       <form onSubmit={addBug}>
         <Form.Group id="newBugDescription">
           <Form.Label>New Bug Description:</Form.Label>

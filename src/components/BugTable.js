@@ -2,8 +2,8 @@ import React from "react";
 
 const BugTable = (props) => {
   const { bugs, onDeleteBug } = props;
-  const resolvedPressed = (id) => {
-    onDeleteBug(id);
+  const resolvedPressed = (id, user) => {
+    onDeleteBug(id, user);
   };
 
   return (
@@ -44,7 +44,9 @@ const BugTable = (props) => {
               <td>{bug.assignedTo}</td>
               <td>{bug.createBy}</td>
               <td>
-                <button onClick={() => resolvedPressed(bug.key)}>
+                <button
+                  onClick={() => resolvedPressed(bug.key, bug.assignedTo)}
+                >
                   Resolved
                 </button>
               </td>

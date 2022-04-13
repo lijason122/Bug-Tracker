@@ -1,12 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Button, Alert, Container } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import { db } from "../firebase";
 
 const Dashboard = () => {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
+  const [bugCount, setBugCount] = useState(0);
+
+  useEffect(() => {
+    db.collection("users")
+      .where("name", "==", currentUser.displayName)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.docs.map((doc) => setBugCount(doc.data().bugCount));
+      });
+  }, [currentUser]);
 
   async function handleLogout() {
     setError("");
@@ -34,11 +45,14 @@ const Dashboard = () => {
             <strong>Email:</strong> {currentUser.email}
             <br />
             <strong>Signed in as:</strong> {currentUser.displayName}
-            <Link to="/update-profile" className="btn btn-primary w-100 mt-3">
-              Update Profile
-            </Link>
+            <br />
+            You currently have <strong>({bugCount})</strong> ongoing bug
+            {bugCount > 1 ? "s" : ""} to fix
             <Link to="/bug-tracker" className="btn btn-primary w-100 mt-3">
               Bug Tracker
+            </Link>
+            <Link to="/update-profile" className="btn btn-primary w-100 mt-3">
+              Update Profile
             </Link>
           </Card.Body>
         </Card>

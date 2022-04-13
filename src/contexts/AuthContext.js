@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   function signup(email, password, firstName) {
-    db.collection("users").add({ name: firstName });
+    db.collection("users").doc(firstName).set({ name: firstName, bugCount: 0 });
     return auth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
