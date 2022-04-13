@@ -1,9 +1,10 @@
 import React from "react";
 
 const BugTable = (props) => {
-  const { bugs, onDeleteBug } = props;
-  const resolvedPressed = (id, user) => {
-    onDeleteBug(id, user);
+  const { bugs, onDeleteBug, users } = props;
+  const resolvedPressed = (id, targetUser) => {
+    const [assignedUser] = users.filter((user) => user.name === targetUser);
+    onDeleteBug(id, assignedUser.key);
   };
 
   return (

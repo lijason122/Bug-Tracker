@@ -6,9 +6,9 @@ html, body {
 
 body {
     font-family: "Poppins";
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background: linear-gradient(-45deg, #ee7752, #23a6d5, #23d5ab);
     background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
+    animation: gradient 30s ease infinite;
 }
 
 @keyframes gradient {
@@ -28,6 +28,12 @@ body {
   }
 .link:hover {
     color: yellow
+}
+
+.header {
+    font-size: 70px;
+    color: rgb(77, 76, 76);
+    padding-bottom: 50px;
 }
 
 .footer {

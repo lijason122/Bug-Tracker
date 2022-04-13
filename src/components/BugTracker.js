@@ -42,11 +42,14 @@ const BugTracker = () => {
 
   const addBug = (event) => {
     event.preventDefault();
+    const [assignedUser] = userList.filter((user) => user.name === newUser);
     const newBug = {
       description: newBugDescription,
       priority: newBugPriority,
       createBy: currentUser.displayName,
+      createById: currentUser.uid,
       assignedTo: newUser,
+      assignedToId: assignedUser.key,
       order:
         newBugPriority === "High" ? 1 : newBugPriority === "Medium" ? 2 : 3,
     };
@@ -54,13 +57,15 @@ const BugTracker = () => {
     setNewBugDescription("");
     setNewBugPriority("Medium");
 
-    db.collection("users").doc(newUser).update({ bugCount: increment });
+    db.collection("users")
+      .doc(assignedUser.key)
+      .update({ bugCount: increment });
     db.collection("bugs").add(newBug);
     setLoading(true);
   };
 
-  const deleteBug = (id, user) => {
-    db.collection("users").doc(user).update({ bugCount: decrement });
+  const deleteBug = (id, userId) => {
+    db.collection("users").doc(userId).update({ bugCount: decrement });
     db.collection("bugs").doc(id).delete();
     setLoading(true);
   };
@@ -70,7 +75,8 @@ const BugTracker = () => {
       <h1>Bug Tracker 🐛</h1>
       <BugTable
         bugs={bugList}
-        onDeleteBug={(id, user) => deleteBug(id, user)}
+        users={userList}
+        onDeleteBug={(id, userId) => deleteBug(id, userId)}
       />
       <form onSubmit={addBug}>
         <Form.Group id="newBugDescription">
@@ -104,16 +110,16 @@ const BugTracker = () => {
             onChange={(event) => setNewUser(event.target.value)}
           >
             <option>Select User</option>
-            {userList.map((user, i) => {
+            {userList.map((user) => {
               return (
-                <option key={i} value={user.name}>
+                <option key={user.key} value={user.name}>
                   {user.name}
                 </option>
               );
             })}
           </Form.Select>
         </Form.Group>
-        <Button className="w-100 mt-3 btn-info" type="submit">
+        <Button className="w-100 mt-3 btn-warning" type="submit">
           Add New Bug
         </Button>
       </form>

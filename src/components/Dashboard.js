@@ -36,8 +36,8 @@ const Dashboard = () => {
       className="d-flex align-items-center justify-content-center"
       style={{ minHeight: "92vh" }}
     >
+      <h1 className="header mb-5">Welcome, {currentUser.displayName}!</h1>
       <div className="w-100" style={{ maxWidth: "400px" }}>
-        <h1>Welcome, {currentUser.displayName}!</h1>
         <Card>
           <Card.Body>
             <h2 className="text-center mb-4">Profile</h2>
@@ -47,7 +47,7 @@ const Dashboard = () => {
             <strong>Signed in as:</strong> {currentUser.displayName}
             <br />
             You currently have <strong>({bugCount})</strong> ongoing bug
-            {bugCount > 1 ? "s" : ""} to fix
+            {bugCount > 1 ? "s" : ""}
             <Link to="/bug-tracker" className="btn btn-primary w-100 mt-3">
               Bug Tracker
             </Link>

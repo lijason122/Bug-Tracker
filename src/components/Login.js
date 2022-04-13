@@ -50,6 +50,12 @@ const Login = () => {
               </Button>
             </Form>
             <div className="w-100 text-center mt-3">
+              Demo Email: guest@demo.com
+            </div>
+            <div className="w-100 text-center mt-3">
+              Demo Password: guestpassword
+            </div>
+            <div className="w-100 text-center mt-3">
               <Link to="/forgot-password">Forgot Password?</Link>
             </div>
           </Card.Body>
