@@ -1,10 +1,11 @@
 import React from "react";
 
 const BugTable = (props) => {
-  const { bugs, onDeleteBug, users } = props;
+  const { bugs, onDeleteBug, users, onClickAlert } = props;
   const resolvedPressed = (id, targetUser) => {
     const [assignedUser] = users.filter((user) => user.name === targetUser);
     onDeleteBug(id, assignedUser.key);
+    onClickAlert();
   };
 
   return (

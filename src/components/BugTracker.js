@@ -4,6 +4,7 @@ import { db, increment, decrement } from "../firebase";
 import { Link } from "react-router-dom";
 import BugTable from "./BugTable";
 import { useAuth } from "../contexts/AuthContext";
+import { useNotification } from "../contexts/NotificationProvider";
 
 const BugTracker = () => {
   const [newBugDescription, setNewBugDescription] = useState("");
@@ -13,6 +14,7 @@ const BugTracker = () => {
   const { currentUser } = useAuth();
   const [userList, setUserList] = useState([]);
   const [newUser, setNewUser] = useState("");
+  const dispatch = useNotification();
 
   useEffect(() => {
     db.collection("bugs")
@@ -70,6 +72,36 @@ const BugTracker = () => {
     setLoading(true);
   };
 
+  const handleSuccessNotification = () => {
+    dispatch({
+      type: "SUCCESS",
+      message: "Bug Submitted",
+    });
+  };
+
+  const handleResolveNotification = () => {
+    dispatch({
+      type: "SUCCESS",
+      message: "Bug Resolved!",
+    });
+  };
+
+  const handleErrorNotification = (e) => {
+    e.preventDefault();
+    dispatch({
+      type: "ERROR",
+      message: "Error occurred",
+    });
+  };
+
+  const handleSubmitMessages = (e) => {
+    if (newBugDescription && newUser) {
+      handleSuccessNotification();
+    } else {
+      handleErrorNotification(e);
+    }
+  };
+
   return (
     <div>
       <h1>Bug Tracker 🐛</h1>
@@ -77,6 +109,7 @@ const BugTracker = () => {
         bugs={bugList}
         users={userList}
         onDeleteBug={(id, userId) => deleteBug(id, userId)}
+        onClickAlert={() => handleResolveNotification()}
       />
       <form onSubmit={addBug}>
         <Form.Group id="newBugDescription">
@@ -109,7 +142,7 @@ const BugTracker = () => {
             value={newUser}
             onChange={(event) => setNewUser(event.target.value)}
           >
-            <option>Select User</option>
+            <option value={""}>Select User</option>
             {userList.map((user) => {
               return (
                 <option key={user.key} value={user.name}>
@@ -119,7 +152,11 @@ const BugTracker = () => {
             })}
           </Form.Select>
         </Form.Group>
-        <Button className="w-100 mt-3 btn-warning" type="submit">
+        <Button
+          className="w-100 mt-3 btn-warning"
+          type="submit"
+          onClick={handleSubmitMessages}
+        >
           Add New Bug
         </Button>
       </form>

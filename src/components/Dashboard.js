@@ -30,14 +30,13 @@ const Dashboard = () => {
     }
   }
 
-  console.log(currentUser);
   return (
     <Container
       className="d-flex align-items-center justify-content-center"
       style={{ minHeight: "92vh" }}
     >
-      <h1 className="header mb-5">Welcome, {currentUser.displayName}!</h1>
       <div className="w-100" style={{ maxWidth: "400px" }}>
+        <h1 className="mb-5">Welcome, {currentUser.displayName}!</h1>
         <Card>
           <Card.Body>
             <h2 className="text-center mb-4">Profile</h2>
