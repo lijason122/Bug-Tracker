@@ -130,19 +130,15 @@ body {
         width:100%;
     }
     th{
-        flex:10%;
+        flex:1 1 10%;
         order:1;  
     }
     td{
-        flex:10%;
+        flex:1 1 10%;
         order:1;
     }
     th:nth-child(5){
-        background:#ccc;
-        flex:4 1 100%;
-        font-weight:bold;
-        order:4;
-        text-align:center;
+        display: none;
     }
     td:nth-child(5){
         background:#ccc;
@@ -161,20 +157,25 @@ body {
         width:100%;
     }
     th{
-        flex:10%;
+        flex:1 1 10%;
         order:1;  
     }
     td{
-        flex:10%;
+        flex:1 1 10%;
         order:1;
     }
+    th:nth-child(3) {
+        white-space: nowrap;
+     }
+    th:nth-child(4) {
+        display: none;
+     }
     th:nth-child(5){
-        background:#ccc;
-        flex:4 1 100%;
-        font-weight:bold;
-        order:4;
-        text-align:center;
+        display: none;
     }
+    td:nth-child(4) {
+        display: none;
+     }
     td:nth-child(5){
         background:#ccc;
         flex:4 1 100%;
