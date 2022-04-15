@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
       .then((result) => {
         db.collection("users")
           .doc(result.user.uid)
-          .set({ name: firstName, bugCount: 0 });
+          .set({ id: result.user.uid, name: firstName, bugCount: 0 });
         return result.user.updateProfile({
           displayName: firstName,
         });

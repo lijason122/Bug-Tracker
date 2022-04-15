@@ -12,7 +12,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     db.collection("users")
-      .where("name", "==", currentUser.displayName)
+      .where("id", "==", currentUser.uid)
       .get()
       .then((querySnapshot) => {
         querySnapshot.docs.map((doc) => setBugCount(doc.data().bugCount));
