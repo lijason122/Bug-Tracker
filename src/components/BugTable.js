@@ -31,7 +31,7 @@ const BugTable = (props) => {
         {bugs.length > 0 &&
           bugs.map((bug) => (
             <tr key={bug.key}>
-              <td>{bug.description}</td>
+              <td className="description">{bug.description}</td>
               <td
                 className={
                   bug.priority === "Low"
@@ -47,6 +47,7 @@ const BugTable = (props) => {
               <td>{bug.createBy}</td>
               <td>
                 <button
+                  className="resolve-button"
                   onClick={() => resolvedPressed(bug.key, bug.assignedTo)}
                 >
                   Resolved

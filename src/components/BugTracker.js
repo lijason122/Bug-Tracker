@@ -113,7 +113,7 @@ const BugTracker = () => {
       />
       <form onSubmit={addBug}>
         <Form.Group id="newBugDescription">
-          <Form.Label>New Bug Description:</Form.Label>
+          <Form.Label>New bug description:</Form.Label>
           <Form.Control
             type="text"
             required
@@ -122,7 +122,7 @@ const BugTracker = () => {
           />
         </Form.Group>
         <Form.Group id="newBugPriority" className="mt-3">
-          <Form.Label>New Bug Priority:</Form.Label>
+          <Form.Label>New bug priority:</Form.Label>
           <Form.Select
             type="text"
             required
@@ -135,7 +135,7 @@ const BugTracker = () => {
           </Form.Select>
         </Form.Group>
         <Form.Group id="newUser" className="mt-3">
-          <Form.Label>Assign To:</Form.Label>
+          <Form.Label>Assign to:</Form.Label>
           <Form.Select
             type="text"
             required

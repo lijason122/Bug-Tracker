@@ -40,6 +40,16 @@ body {
     color: #FFF;
 }
 
+.description {
+    width: 300px;
+    word-wrap: break-word;
+}
+
+.resolve-button {
+    background-color: rgb(30, 202, 30);
+    color: white;
+}
+
 .notification-wrapper {
     position: fixed;
     top: 10px;
@@ -58,7 +68,7 @@ body {
     width: 300px;
 }
 
-.flex {
+.notification-flex {
     display: flex
 }
 
@@ -110,4 +120,66 @@ body {
 
 .notification-item.error .bar {
     background-color: red;
+}
+
+/* ======= MEDIA QUERIES (MEDIUM DEVICES) ======== */
+@media screen and (max-width: 1024px) {
+    tr{
+        display:flex;
+        flex-flow:row wrap;
+        width:100%;
+    }
+    th{
+        flex:10%;
+        order:1;  
+    }
+    td{
+        flex:10%;
+        order:1;
+    }
+    th:nth-child(5){
+        background:#ccc;
+        flex:4 1 100%;
+        font-weight:bold;
+        order:4;
+        text-align:center;
+    }
+    td:nth-child(5){
+        background:#ccc;
+        flex:4 1 100%;
+        font-weight:bold;
+        order:4;
+        text-align:center;
+    }
+}
+
+/* ======= MEDIA QUERIES (SMALL DEVICES) ======== */
+@media screen and (max-width: 600px) {
+    tr{
+        display:flex;
+        flex-flow:row wrap;
+        width:100%;
+    }
+    th{
+        flex:10%;
+        order:1;  
+    }
+    td{
+        flex:10%;
+        order:1;
+    }
+    th:nth-child(5){
+        background:#ccc;
+        flex:4 1 100%;
+        font-weight:bold;
+        order:4;
+        text-align:center;
+    }
+    td:nth-child(5){
+        background:#ccc;
+        flex:4 1 100%;
+        font-weight:bold;
+        order:4;
+        text-align:center;
+    }
 }

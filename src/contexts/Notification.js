@@ -50,7 +50,7 @@ const Notification = (props) => {
         props.type === "SUCCESS" ? "success" : "error"
       } ${exit ? "exit" : ""}`}
     >
-      <div className="flex">
+      <div className="notification-flex">
         {props.message && (
           <h5
             className="m-3"

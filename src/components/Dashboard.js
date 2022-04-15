@@ -46,7 +46,7 @@ const Dashboard = () => {
             <strong>Signed in as:</strong> {currentUser.displayName}
             <br />
             You currently have <strong>({bugCount})</strong> ongoing bug
-            {bugCount > 1 ? "s" : ""}
+            {bugCount === 1 ? "" : "s"}
             <Link to="/bug-tracker" className="btn btn-primary w-100 mt-3">
               Bug Tracker
             </Link>
