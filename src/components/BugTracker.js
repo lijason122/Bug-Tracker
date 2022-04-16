@@ -32,6 +32,7 @@ const BugTracker = () => {
 
   useEffect(() => {
     db.collection("users")
+      .orderBy("name", "asc")
       .get()
       .then((querySnapshot) => {
         let arr = [];
@@ -66,9 +67,9 @@ const BugTracker = () => {
     setLoading(true);
   };
 
-  const deleteBug = (id, userId) => {
+  const deleteBug = async (id, userId) => {
     db.collection("users").doc(userId).update({ bugCount: decrement });
-    db.collection("bugs").doc(id).delete();
+    await db.collection("bugs").doc(id).delete();
     setLoading(true);
   };
 
