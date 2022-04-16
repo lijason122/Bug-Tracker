@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { Form, Button, Card, Alert, Container } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import { useNotification } from "../contexts/NotificationProvider";
 
 const Signup = () => {
   const emailRef = useRef();
@@ -10,9 +11,16 @@ const Signup = () => {
   const passwordConfirmRef = useRef();
   const { signup } = useAuth();
   const [error, setError] = useState("");
-  // Prevent the user from clicking the sign up button and creating the same account multiple times
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useNotification();
+
+  const handleNotification = (response, msg) => {
+    dispatch({
+      type: response,
+      message: msg,
+    });
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -29,6 +37,7 @@ const Signup = () => {
         passwordRef.current.value,
         firstNameRef.current.value
       );
+      handleNotification("SUCCESS", "Signed Up!");
       navigate("/");
     } catch {
       setError(

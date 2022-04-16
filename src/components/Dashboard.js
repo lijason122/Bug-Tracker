@@ -3,12 +3,14 @@ import { Card, Button, Alert, Container } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { db } from "../firebase";
+import { useNotification } from "../contexts/NotificationProvider";
 
 const Dashboard = () => {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
   const [bugCount, setBugCount] = useState(0);
+  const dispatch = useNotification();
 
   useEffect(() => {
     db.collection("users")
@@ -19,11 +21,19 @@ const Dashboard = () => {
       });
   }, [currentUser]);
 
+  const handleNotification = (response, msg) => {
+    dispatch({
+      type: response,
+      message: msg,
+    });
+  };
+
   async function handleLogout() {
     setError("");
 
     try {
       await logout();
+      handleNotification("SUCCESS", "Logged out!");
       navigate("/login");
     } catch {
       setError("Failed to log out");

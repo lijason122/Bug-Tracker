@@ -30,15 +30,6 @@ const NotificationProvider = (props) => {
     }
   }, []);
 
-  //   dispatch({
-  //       type: "ADD_NOTIFICATION",
-  //       payload: {
-  //         id: v4(),
-  //         type: "SUCCESS",
-  //         message: "new notification"
-  //       }
-  //   })
-
   return (
     <NotificationContext.Provider value={dispatch}>
       <div className="notification-wrapper">

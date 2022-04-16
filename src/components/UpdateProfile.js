@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { Form, Button, Card, Alert, Container } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import { useNotification } from "../contexts/NotificationProvider";
 
 const UpdateProfile = () => {
   const emailRef = useRef();
@@ -13,6 +14,14 @@ const UpdateProfile = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useNotification();
+
+  const handleNotification = (response, msg) => {
+    dispatch({
+      type: response,
+      message: msg,
+    });
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -37,6 +46,7 @@ const UpdateProfile = () => {
     Promise.all(promises)
       .then(() => {
         navigate("/");
+        handleNotification("SUCCESS", "User Updated!");
       })
       .catch(() => {
         setError("Failed to update account");

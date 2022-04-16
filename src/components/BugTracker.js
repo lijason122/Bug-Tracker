@@ -72,33 +72,21 @@ const BugTracker = () => {
     setLoading(true);
   };
 
-  const handleSuccessNotification = () => {
+  const handleNotification = (response, msg, e) => {
+    if (e) {
+      e.preventDefault();
+    }
     dispatch({
-      type: "SUCCESS",
-      message: "Bug Submitted",
-    });
-  };
-
-  const handleResolveNotification = () => {
-    dispatch({
-      type: "SUCCESS",
-      message: "Bug Resolved!",
-    });
-  };
-
-  const handleErrorNotification = (e) => {
-    e.preventDefault();
-    dispatch({
-      type: "ERROR",
-      message: "Error occurred",
+      type: response,
+      message: msg,
     });
   };
 
   const handleSubmitMessages = (e) => {
     if (newBugDescription && newUser) {
-      handleSuccessNotification();
+      handleNotification("SUCCESS", "Bug Submitted");
     } else {
-      handleErrorNotification(e);
+      handleNotification("ERROR", "Error occurred", e);
     }
   };
 
@@ -109,7 +97,7 @@ const BugTracker = () => {
         bugs={bugList}
         users={userList}
         onDeleteBug={(id, userId) => deleteBug(id, userId)}
-        onClickAlert={() => handleResolveNotification()}
+        onClickAlert={() => handleNotification("SUCCESS", "Bug Resolved!")}
       />
       <form onSubmit={addBug}>
         <Form.Group id="newBugDescription">

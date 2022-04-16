@@ -21,9 +21,6 @@ export const AuthProvider = ({ children }) => {
         return result.user.updateProfile({
           displayName: firstName,
         });
-      })
-      .catch(function (error) {
-        console.log(error);
       });
   }
 

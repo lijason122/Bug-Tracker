@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { Form, Button, Card, Alert, Container } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import { useNotification } from "../contexts/NotificationProvider";
 
 const Login = () => {
   const emailRef = useRef();
@@ -10,6 +11,14 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useNotification();
+
+  const handleNotification = (response, msg) => {
+    dispatch({
+      type: response,
+      message: msg,
+    });
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -18,6 +27,7 @@ const Login = () => {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
+      handleNotification("SUCCESS", "Logged In!");
       navigate("/");
     } catch {
       setError("Failed to sign in");
