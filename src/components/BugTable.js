@@ -13,16 +13,16 @@ const BugTable = (props) => {
       className="table table-bordered"
       style={{ border: "2px solid gray" }}
     >
-      <thead className="table-secondary">
+      <thead className="table-secondary" style={{ textAlign: "center" }}>
         <tr>
-          <th>Description</th>
+          <th style={{ textAlign: "left" }}>Description</th>
           <th>Priority</th>
           <th>Assigned To:</th>
           <th>Created By:</th>
           <th></th>
         </tr>
       </thead>
-      <tbody className="table-light">
+      <tbody className="table-light" style={{ textAlign: "center" }}>
         {bugs.length === 0 && (
           <tr>
             <td>No Bugs Found</td>
@@ -31,7 +31,9 @@ const BugTable = (props) => {
         {bugs.length > 0 &&
           bugs.map((bug) => (
             <tr key={bug.key}>
-              <td className="description">{bug.description}</td>
+              <td className="description" style={{ textAlign: "left" }}>
+                {bug.description}
+              </td>
               <td
                 className={
                   bug.priority === "Low"

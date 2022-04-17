@@ -85,7 +85,7 @@ const BugTracker = () => {
 
   const handleSubmitMessages = (e) => {
     if (newBugDescription && newUser) {
-      handleNotification("SUCCESS", "Bug Submitted");
+      handleNotification("SUCCESS", "Bug Submitted!");
     } else {
       handleNotification("ERROR", "Error occurred", e);
     }

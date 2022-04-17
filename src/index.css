@@ -8,7 +8,7 @@ body {
     font-family: "Poppins";
     background: linear-gradient(-45deg, #ee7752, #23a6d5, #23d5ab);
     background-size: 400% 400%;
-    animation: gradient 30s ease infinite;
+    animation: gradient 25s ease infinite;
 }
 
 @keyframes gradient {
@@ -41,7 +41,7 @@ body {
 }
 
 .description {
-    width: 300px;
+    max-width: 300px;
     word-wrap: break-word;
 }
 
@@ -69,14 +69,15 @@ body {
 }
 
 .notification-flex {
-    display: flex
+    display: flex;
+    white-space: nowrap;
 }
 
 .cancel {
     border:none;
     background-color:transparent;
     outline:none;
-    padding-left: 62px;
+    padding-left: 60px;
     padding-bottom: 20px;
 }
 
